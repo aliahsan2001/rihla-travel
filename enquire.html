@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- @include head -->
+<title>Enquire · Rihla Travel &amp; Tours</title>
+<meta name="description" content="Tell us where and when. Fill in the boarding pass and we reply with the full plan and a written price, usually the same day.">
+<script type="module" src="/src/main.js"></script>
+</head>
+<body data-barba="wrapper">
+<!-- @include header -->
+<main id="main" data-barba="container" data-barba-namespace="enquire">
+
+  <section class="e-page" aria-labelledby="e-title">
+    <div class="container">
+      <div class="e-head">
+        <div>
+          <p class="eyebrow">Enquire</p>
+          <h1 id="e-title" class="display" data-rise>Your <em>boarding pass</em></h1>
+        </div>
+        <p class="lead">Fill in the pass. We reply with the full plan and a written price, usually the same day, and never ask for payment before you have both.</p>
+      </div>
+
+      <div class="printer" data-printer>
+        <div class="printer-slot" aria-hidden="true"><span></span></div>
+
+        <form class="bp" data-form novalidate>
+          <div class="bp-main">
+            <div class="bp-top">
+              <p class="bp-brand mono">Rihla · Boarding pass</p>
+              <p class="bp-class mono" data-class>Enquiry</p>
+            </div>
+            <div class="bp-route" aria-hidden="true">
+              <div><span class="mono bp-code" data-from-code>KHI</span><small data-from-name>Karachi</small></div>
+              <span class="bp-path"><i></i><svg><use href="#i-plane"/></svg><i></i></span>
+              <div class="bp-to"><span class="mono bp-code" data-to-code>JED</span><small data-to-name>Jeddah</small></div>
+            </div>
+            <div class="bp-fields">
+              <div class="field bp-wide"><label for="e-name">Passenger</label><input id="e-name" name="passenger" autocomplete="name" placeholder="Your full name" required><p class="field-error" data-err="passenger"></p></div>
+              <div class="field"><label for="e-phone">Phone or WhatsApp</label><input id="e-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="03xx xxx xxxx" required><p class="field-error" data-err="phone"></p></div>
+              <div class="field"><label for="e-from">From</label><select id="e-from" name="from"><option value="KHI">Karachi</option><option value="LHE">Lahore</option><option value="ISB">Islamabad</option></select></div>
+              <div class="field bp-wide"><label for="e-trip">Trip</label><select id="e-trip" name="trip" data-trip></select></div>
+              <div class="field"><label for="e-month">Travelling in</label><input id="e-month" name="month" type="month"></div>
+              <div class="field"><span class="field-label" id="e-pax-l">Travellers</span>
+                <div class="stepper" role="group" aria-labelledby="e-pax-l"><button type="button" data-pax="-1" aria-label="One fewer">−</button><output name="pax" data-pax-out aria-live="polite">2</output><button type="button" data-pax="1" aria-label="One more">+</button></div>
+              </div>
+              <div class="field bp-full"><label for="e-notes">Anything we should know <span class="optional">(optional)</span></label><textarea id="e-notes" name="notes" rows="2" placeholder="Elderly parents, a wheelchair, a preferred hotel, dates that matter…"></textarea></div>
+            </div>
+          </div>
+          <div class="bp-stub">
+            <p class="bp-brand mono">Rihla</p>
+            <dl class="bp-mini mono">
+              <div><dt>Passenger</dt><dd data-mirror="name">—</dd></div>
+              <div><dt>Route</dt><dd data-mirror="route">KHI → JED</dd></div>
+              <div><dt>Travellers</dt><dd data-mirror="pax">2</dd></div>
+            </dl>
+            <span class="barcode" aria-hidden="true"></span>
+            <button type="submit" class="btn btn-coral btn-block"><span>Print my pass</span></button>
+          </div>
+        </form>
+
+        <div class="printed" data-printed hidden aria-live="polite"></div>
+      </div>
+
+      <ul class="e-trust">
+        <li><b>Same-day reply</b><span>Mon – Sat, 10 am – 7 pm</span></li>
+        <li><b>No payment to enquire</b><span>A deposit only once you're happy</span></li>
+        <li><b>Prefer to talk?</b><span><a href="tel:+922134567000">+92 21 3456 7000</a></span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+<!-- @include footer -->
+</body>
+</html>

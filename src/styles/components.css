@@ -1,0 +1,167 @@
+/* =========================================================
+   Components: the journey, and the home sections
+   ========================================================= */
+
+/* ---------- the journey: globe (or map) under a poster sky ---------- */
+.journey { position: relative; height: 620vh; margin-top: calc((var(--header-h) + var(--header-top)) * -1); }
+.journey-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; background: linear-gradient(180deg, #b9e4e8 0%, #e4f3ef 30%, #fff3dc 62%, #fcdcae 100%); }
+.journey-sticky::before { content: ''; position: absolute; right: 8%; top: 50%; width: min(72vh, 52vw); aspect-ratio: 1; translate: 0 -50%; border-radius: 50%; background: radial-gradient(circle, rgba(247, 168, 35, .34), rgba(247, 168, 35, 0) 68%); pointer-events: none; }
+.globe-stage { position: absolute; inset: 0; }
+.globe-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.6s var(--ease); }
+.globe-stage canvas.is-ready { opacity: 1; }
+.use-map .globe-stage canvas, .use-map .globe-labels { display: none; }
+.globe-labels { position: absolute; inset: 0; pointer-events: none; }
+.globe-label { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 8px; margin: -36px 0 0 12px; padding: 5px 11px 5px 5px; border-radius: 10px; background: var(--cream); box-shadow: 3px 3px 0 var(--night); font-size: .82rem; font-weight: 600; white-space: nowrap; opacity: 0; translate: 0 6px; transition: opacity .6s var(--ease), translate .8s var(--ease); }
+.globe-label .mono { padding: 2px 6px; border-radius: 6px; background: var(--sea); color: var(--cream); font-size: .66rem; font-weight: 500; }
+.globe-label.is-hub .mono { background: var(--clay); }
+.globe-label.is-on { opacity: 1; translate: 0 0; }
+.route-map { display: none; position: absolute; inset: 0; width: 100%; height: 100%; }
+.use-map .route-map { display: block; }
+.map-sea { fill: #a9dde1; }
+.map-shore { fill: none; stroke: rgba(255, 255, 255, .7); stroke-width: 7; stroke-linejoin: round; }
+.map-land { fill: #f7dfab; stroke: rgba(18, 38, 58, .25); stroke-width: .8; }
+.map-hl { fill: #f6c4b4; }
+.map-hl.is-pk { fill: #66b38b; }
+.map-borders { fill: none; stroke: #fff; stroke-width: 1.1; stroke-dasharray: 2 3; opacity: .9; }
+.rm-route { fill: none; stroke: var(--clay); stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: .1 11; }
+.rm-guide { fill: none; stroke: none; }
+.rm-reveal { fill: none; stroke: #fff; stroke-width: 14; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.rm-city { fill: var(--sea); opacity: .4; transition: opacity .6s; }
+.rm-city.is-on { opacity: 1; }
+.rm-city.is-hub { fill: var(--clay); }
+.rm-city text { font: 700 17px var(--font-body); fill: var(--night); paint-order: stroke; stroke: rgba(255, 248, 236, .95); stroke-width: 5px; }
+.rm-pulse { fill: none; stroke: var(--sea); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; opacity: 0; }
+.rm-city.is-on .rm-pulse { animation: rmPulse 2.2s var(--ease) infinite; }
+.rm-city.is-hub .rm-pulse { stroke: var(--clay); }
+@keyframes rmPulse { from { transform: scale(.6); opacity: .8; } to { transform: scale(2.4); opacity: 0; } }
+.rm-plane { fill: #fff; stroke: var(--night); stroke-width: 1.4; stroke-linejoin: round; transition: opacity .3s; }
+.rm-crease { fill: none; stroke: #9aa3ad; }
+
+/* the copy sits in the space below the header, never under it */
+.journey-copy { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + var(--header-top) * 2 + 20px); bottom: 86px; display: grid; align-content: center; pointer-events: none; }
+.jc { grid-area: 1 / 1; align-self: center; max-width: 560px; opacity: 0; visibility: hidden; transform: translateY(18px); transition: opacity .45s ease, transform .8s var(--ease), visibility 0s .8s; }
+.jc.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity .9s ease .2s, transform 1.1s var(--ease) .15s, visibility 0s; pointer-events: auto; }
+.jc h1 { font-size: min(7.6vw, 13vh, 7.4rem) !important; }
+.jc h1 em { display: inline-block; position: relative; }
+.jc h1 em::after { content: ''; position: absolute; left: 0; right: 0; bottom: -.06em; height: .12em; color: var(--sun); background: var(--dots); background-size: .26em .12em; }
+.jc .lead { margin-top: 22px; color: #3d4a58; }
+.jc-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.jc-stop { --c: var(--sea); --t: var(--cream); position: relative; padding: 26px 30px 28px; border-radius: 24px; background: var(--c); color: var(--t); max-width: 470px; box-shadow: var(--pop); overflow: hidden; }
+.jc-stop[data-jc='2'] { --c: var(--palm); }
+.jc-stop[data-jc='3'] { --c: var(--sun); --t: var(--night); }
+.jc-stop[data-jc='4'] { --c: var(--clay); }
+.jc-stop::after { content: attr(data-code); position: absolute; right: -6px; top: -18px; font-family: var(--font-mono); font-size: 7.4rem; line-height: 1; letter-spacing: -.04em; opacity: .14; pointer-events: none; }
+.jc-stop h2 { font-size: clamp(2.4rem, 4.2vw, 3.8rem) !important; margin-top: 16px; }
+.jc-stop h2 em { color: inherit; opacity: .78; }
+.jc-stop .lead { margin-top: 12px; margin-bottom: 20px; font-size: 1.04rem; color: inherit; opacity: .86; }
+.jc-stop .text-link { border-color: currentColor; }
+.jc-leg { display: inline-flex; align-items: center; gap: 10px; padding: 5px 10px; border-radius: 8px; background: rgba(255, 255, 255, .16); font-size: .78rem; }
+.jc-stop[data-jc='3'] .jc-leg { background: rgba(18, 38, 58, .1); }
+.jc-leg i { width: 40px; height: 6px; color: currentColor; background: var(--dots); background-size: 7px 6px; opacity: .7; }
+.route-ticker { position: absolute; right: var(--gutter); bottom: 30px; display: flex; gap: 6px; align-items: center; font-size: .74rem; }
+.route-ticker li { padding: 5px 9px; border-radius: 8px; background: rgba(255, 248, 236, .7); color: var(--muted); transition: background-color .5s, color .5s; }
+.route-ticker li.is-past { background: var(--sea); color: var(--cream); }
+.route-ticker li.is-on { background: var(--clay); color: var(--cream); }
+.scroll-cue { position: absolute; left: 50%; bottom: 28px; translate: -50% 0; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--night); transition: opacity .6s; }
+.scroll-cue::after { content: ''; display: block; width: 2px; height: 34px; margin: 10px auto 0; background: linear-gradient(var(--clay), transparent); animation: cue 2.4s var(--ease) infinite; transform-origin: top; }
+@keyframes cue { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+.journey.is-moving .scroll-cue { opacity: 0; }
+
+/* ---------- ways: three coloured luggage labels ---------- */
+.ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 34px); }
+.way { --c: var(--sea); --t: var(--cream); position: relative; display: grid; align-content: start; gap: 10px; padding: 14px 14px 26px; border-radius: 28px; background: var(--c); color: var(--t); text-decoration: none; transition: transform .7s var(--ease); }
+.way:nth-child(1) { rotate: -1.2deg; }
+.way:nth-child(2) { --c: var(--clay); rotate: .8deg; margin-top: clamp(20px, 4vw, 60px); }
+.way:nth-child(3) { --c: var(--sun); --t: var(--night); rotate: -.6deg; }
+.way:hover { transform: translateY(-8px) rotate(.6deg); }
+.way figure { margin: 0 0 10px; aspect-ratio: 4 / 4.4; border-radius: 200px 200px 18px 18px; }
+.way figure img { width: 100%; height: 100%; object-fit: cover; }
+.way > *:not(figure) { padding-inline: 12px; }
+.way-meta { justify-self: start; margin-left: 12px; padding: 4px 9px !important; border-radius: 7px; background: rgba(255, 255, 255, .18); font-size: .72rem; }
+.way:nth-child(3) .way-meta { background: rgba(18, 38, 58, .1); }
+.way h3 { font-size: 2.3rem !important; }
+.way p { opacity: .86; max-width: 34ch; }
+
+/* ---------- departures board: a real one, dark with saffron flaps ---------- */
+.board { border-top: 1px solid var(--line-dark); }
+.board-row { display: grid; grid-template-columns: 130px 180px minmax(0, 1fr) 110px 150px; align-items: center; gap: 20px; padding: 16px 12px; border-bottom: 1px solid var(--line-dark); text-decoration: none; transition: background-color .4s var(--ease); }
+.board-row:not(.board-head):hover { background: rgba(255, 248, 236, .06); }
+.board-head { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sky); padding-block: 12px; }
+.board-date, .board-code { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; }
+.board-code i { width: 24px; height: 6px; color: var(--sky); background: var(--dots); background-size: 6px 6px; }
+.board-trip { font-size: 1.04rem; font-weight: 500; }
+.board-seats { font-size: .86rem; color: var(--sky); }
+.board-seats.is-low { color: var(--clay-2); }
+.board-price { text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; letter-spacing: -.02em; color: var(--sun); }
+[data-flip] { display: inline-flex; gap: 2px; }
+.flap { display: inline-grid; place-items: center; min-width: 1em; padding: 4px 1px; border-radius: 3px; background: #0a1826; color: var(--sun); font-size: .92em; line-height: 1.1; position: relative; }
+.flap::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0, 0, 0, .55); }
+.flap.is-space { background: transparent; min-width: .4em; }
+.flap.is-space::after { content: none; }
+.flap.is-turn { animation: flap .11s ease-in; }
+@keyframes flap { 0% { transform: perspective(200px) rotateX(-70deg); filter: brightness(.7); } 100% { transform: none; } }
+.board-section .section-head .label { color: var(--sky); }
+
+/* ---------- trust ---------- */
+.trust { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(30px, 6vw, 100px); align-items: start; }
+.trust-list { display: grid; gap: 12px; counter-reset: t; }
+.trust-list li { counter-increment: t; display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 4px 18px; padding: 18px 20px; border-radius: 18px; background: var(--cream); box-shadow: 0 0 0 2px var(--night); }
+.trust-list li::before { content: counter(t, decimal-leading-zero); grid-row: span 2; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--sun); font-family: var(--font-mono); font-size: .9rem; }
+.trust-list li:nth-child(2)::before { background: var(--sky); }
+.trust-list li:nth-child(3)::before { background: var(--rose); }
+.trust-list li:nth-child(4)::before { background: var(--clay-2); color: var(--cream); }
+.trust-list b { font-weight: 600; font-size: 1.06rem; }
+.trust-list span { color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: clamp(60px, 8vw, 100px) 0 0; }
+.stats > div { padding: 26px 26px 22px; border-radius: 22px; background: var(--sea); color: var(--cream); }
+.stats > div:nth-child(2) { background: var(--clay); }
+.stats > div:nth-child(3) { background: var(--night); }
+.stats dt { font-family: var(--font-display); font-weight: 800; letter-spacing: -.04em; font-size: clamp(2.6rem, 4.4vw, 4.2rem); line-height: 1; }
+.stats dt span { font: inherit; }
+.stats dd { margin: 10px 0 0; font-size: .92rem; color: var(--on-dark-muted); }
+
+/* ---------- testimonials over the clouds ---------- */
+.say-wrap { overflow: hidden; }
+.say-photo { position: absolute; inset: 0; margin: 0; }
+.say-photo img { width: 100%; height: 100%; object-fit: cover; }
+.say-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14, 97, 112, .85), rgba(14, 97, 112, .35)); }
+.say { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); padding-block: clamp(30px, 5vw, 70px); }
+.say figure { margin: 0; display: grid; gap: 22px; align-content: start; padding: 30px; border-radius: 24px; background: var(--cream); box-shadow: var(--pop); }
+.say figure:nth-child(2) { background: var(--sun); rotate: 1deg; }
+.say figure:nth-child(1) { rotate: -1deg; }
+.say blockquote { margin: 0; font-size: clamp(1.5rem, 2.4vw, 2.2rem); line-height: 1.12; }
+.say figcaption { display: grid; gap: 4px; }
+.say figcaption b { font-weight: 600; }
+
+@media (max-width: 1000px) {
+  .ways, .trust, .say { grid-template-columns: minmax(0, 1fr); }
+  .way:nth-child(2) { margin-top: 0; }
+  .board-row { grid-template-columns: 110px 150px minmax(0, 1fr) 120px; }
+  .board-seats { display: none; }
+}
+@media (max-width: 760px) {
+  .journey { height: 560vh; }
+  .journey-copy { top: auto; bottom: 74px; align-content: end; }
+  .jc { max-width: none; }
+  .jc h1 { font-size: clamp(3rem, 14vw, 4.2rem) !important; }
+  .jc .lead { margin-top: 14px; font-size: 1rem; }
+  .jc-stop { padding: 20px 22px 22px; }
+  .jc-stop::after { font-size: 5rem; }
+  .jc-stop h2 { font-size: 2.3rem !important; }
+  .journey-sticky::before { display: none; }
+  .route-map { height: 64%; top: 30px; -webkit-mask: linear-gradient(#000 80%, transparent); mask: linear-gradient(#000 80%, transparent); }
+  .route-map.is-narrow .rm-city text { font-size: 34px; stroke-width: 8px; }
+  .route-map.is-narrow .rm-city circle:not(.rm-pulse) { r: 9; }
+  .route-map.is-narrow .rm-route { stroke-width: 9; stroke-dasharray: .1 20; }
+  .route-map.is-narrow .rm-reveal { stroke-width: 26; }
+  .route-map.is-narrow .map-borders { stroke-width: 2; stroke-dasharray: 4 6; }
+  .route-ticker { left: var(--gutter); right: auto; bottom: 26px; gap: 4px; }
+  .route-ticker li { padding: 4px 6px; }
+  .scroll-cue { display: none; }
+  .board-row { grid-template-columns: 90px minmax(0, 1fr) auto; gap: 12px; }
+  .board-code { display: none; }
+  .board-price { font-size: 1.05rem; }
+  .stats { grid-template-columns: minmax(0, 1fr); }
+}
+/* Dubai sits close to Karachi: its label hangs below the city instead */
+.globe-label[data-id='dubai'] { margin: 14px 0 0 -70px; }
