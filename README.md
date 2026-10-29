@@ -1,5 +1,13 @@
 # Rihla Travel & Tours: "Every journey has a route"
 
+[**Live demo**](https://rihla-travel-drab.vercel.app) · [Source files](./src/) · [Local setup](#run-it)
+
+## Project at a glance
+
+Package comparisons, itinerary visualisation, map data, and preselected enquiry flows.
+
+**Scope:** Frontend concept with sample packages and contact details. Enquiries and bookings are not submitted to a backend.
+
 Concept project 8 of 8 for the Aqoa Systems portfolio. A fictional Karachi travel agency for Umrah packages, northern Pakistan tours, holidays abroad and visa help.
 
 ## What's in it
@@ -30,7 +38,7 @@ The globe, postcards and maps are procedural, with no model files. Country outli
 ## Run it
 From a terminal:
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 The site uses ES modules, so it needs a server. Opening `index.html` by double-clicking won't work. Testing flags: `?lite` forces the lighter version, `?full` forces 3D.
